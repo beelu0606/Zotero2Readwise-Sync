@@ -28,5 +28,15 @@ jobs:
       - name: 📥 Download the Python script needed for automation
         run: curl https://raw.githubusercontent.com/e-alizadeh/Zotero2Readwise/master/zotero2readwise/run.py -o run.py
       
+      - name: 🐛 Debugging: Print secrets (masked)
+        run: |
+          echo "Readwise Token: ${READWISE_TOKEN}"
+          echo "Zotero Key: ${ZOTERO_KEY}"
+          echo "Zotero ID: ${ZOTERO_ID}"
+        env:
+          READWISE_TOKEN: ${{ secrets.READWISE_TOKEN }}
+          ZOTERO_KEY: ${{ secrets.ZOTERO_KEY }}
+          ZOTERO_ID: ${{ secrets.ZOTERO_ID }}
+
       - name: 🚀 Run Automation
         run: python run.py "${{ secrets.READWISE_TOKEN }}" "${{ secrets.ZOTERO_KEY }}" "${{ secrets.ZOTERO_ID }}"
